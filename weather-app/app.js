@@ -6,5 +6,5 @@ const url = 'https://api.darksky.net/forecast/0ee08d8f805d9445fbcd330617b763c5/3
 
 request({url: url}, (error, response)=>{
     const data = JSON.parse(response.body)
-    console.log(data.currently.time);
+    console.log(data.currently);
 });
