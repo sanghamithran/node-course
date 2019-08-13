@@ -1,7 +1,8 @@
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 const request = require('request');
+const geocode = require('./utils/geocode');
 
-const url = 'https://api.darksky.net/forecast/0ee08d8f805d9445fbcd330617b763c5/37.8267,-122.4233';
+// const url = 'https://api.darksky.net/forecast/0ee08d8f805d9445fbcd330617b763c5/37.8267,-122.4233';
 
 
 // request({url: url, json:true}, (error, response)=>{
@@ -18,17 +19,23 @@ const url = 'https://api.darksky.net/forecast/0ee08d8f805d9445fbcd330617b763c5/3
 // });
 
 
-const geocodeURL = "https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoibHV0dGFwcGlubzEiLCJhIjoiY2p5enhkbGFiMDFnNTNkcGpxNXBwaXJrMCJ9.XyCerIQWaihThyY6XPjnxw&limit=1"
+// const geocodeURL = "https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoibHV0dGFwcGlubzEiLCJhIjoiY2p5enhkbGFiMDFnNTNkcGpxNXBwaXJrMCJ9.XyCerIQWaihThyY6XPjnxw&limit=1"
 
-request({url : geocodeURL , json:true}, (error, response)=>{
+// request({url : geocodeURL , json:true}, (error, response)=>{
 
-    if(error){
-        console.log("Unable to connect to location services ")
-    } else if (response.body.features.length === 0){
-        console.log("Unable to find location. Try another search.")
-    } else {
-    const latitude =  response.body.features[0].center[1];
-    const longitude = response.body.features[0].center[0];
-    console.log(latitude+" "+longitude);
-    }
-}) 
+//     if(error){
+//         console.log("Unable to connect to location services ")
+//     } else if (response.body.features.length === 0){
+//         console.log("Unable to find location. Try another search.")
+//     } else {
+//     const latitude =  response.body.features[0].center[1];
+//     const longitude = response.body.features[0].center[0];
+//     console.log(latitude+" "+longitude);
+//     }
+// }) 
+
+geocode('Bangalore', (error, data) => {
+    console.log("Error", error);
+    console.log("Data", data);
+})
+
