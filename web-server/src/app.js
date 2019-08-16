@@ -6,6 +6,9 @@ console.log(__filename);
 console.log(path.join(__dirname, "../public"));
 
 const app = express();
+const publicDirectory = path.join(__dirname, "../public");
+
+app.use(express.static(publicDirectory));
 
 app.get('/', (req, res)=>{
     res.send('<h1>Weather</h1>');
