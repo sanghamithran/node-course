@@ -1,21 +1,29 @@
 //CRUD Operations
 
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
+// const mongodb = require('mongodb');
+// const MongoClient = mongodb.MongoClient;
+// const ObjectID = mongodb.ObjectID;
+
+const { MongoClient, ObjectID } = require('mongodb');
 
 const connectionURL = 'mongodb://127.0.0.1:27017';
 const database = 'task-manager';
+
+const id = new ObjectID();
+console.log(id.id);
+console.log(id.toHexString().length);
 
 MongoClient.connect(connectionURL, { useNewUrlParser: true}, (error, client)=>{
     if(error){
         return console.log('Unable to connect to the DB');
     }
 
-    const db = client.db(database);
+    // const db = client.db(database);
 
     // db.collection('users').insertOne({
-    //     name: 'Andrew',
-    //     age: 27
+    //     _id: id,
+    //     name: 'Vikram',
+    //     age: 26
     // },(error, result)=>{
     //     if(error){
     //         return console.log('Unable to insert user');
@@ -40,25 +48,25 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true}, (error, client)=>{
     //     console.log(result.ops);
     // })
 
-    db.collection('tasks').insertMany([
-        {
-            description:'Clean the house',
-            completed: true
-        },
-        {
-            description: 'Renew inspection',
-            completed: false
-        },
-        {
-            description: 'Pot plants',
-            completed: false
-        }
-    ], (error, result)=>{
-        if(error){
-            return console.log('Unable to insert tasks');
-        }
+    // db.collection('tasks').insertMany([
+    //     {
+    //         description:'Clean the house',
+    //         completed: true
+    //     },
+    //     {
+    //         description: 'Renew inspection',
+    //         completed: false
+    //     },
+    //     {
+    //         description: 'Pot plants',
+    //         completed: false
+    //     }
+    // ], (error, result)=>{
+    //     if(error){
+    //         return console.log('Unable to insert tasks');
+    //     }
 
-        console.log(result.ops);
-    })
+    //     console.log(result.ops);
+    // })
 
 });
