@@ -4,11 +4,14 @@
   "description": "",
   "main": "mongodb.js",
   "dependencies": {
+    "express": "^4.16.4",
     "mongodb": "^3.1.10",
     "mongoose": "^5.3.16",
     "validator": "^10.9.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
