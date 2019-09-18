@@ -58,7 +58,7 @@ app.get('/tasks', (req, res)=>{
 })
 
 app.get('/tasks/:id',(req, res)=>{
-    const _id = req.body.id;
+    const _id = req.params.id;
 
     Task.findById(_id).then((task)=>{
         if(!task){
