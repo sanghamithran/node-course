@@ -1,5 +1,6 @@
 const express = require('express');
-require('./db/mongoose');
+const bcrypt = require('bcryptjs')
+const mongoose = require('./db/mongoose');
 const User = require("./models/user");
 const Task = require('./models/task');
 const userRouter = require('./routers/user')
@@ -16,7 +17,7 @@ app.listen(port, ()=>{
     console.log('Server is up on port '+ port);
 })
 
-const bcrypt = require('bcryptjs')
+
 
 const myFunction = async () =>{
     const password = 'Red12345';
