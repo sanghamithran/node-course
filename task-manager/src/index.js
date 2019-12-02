@@ -27,15 +27,17 @@ app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });
 
-// eslint-disable-next-line import/order
-const jwt = require('jsonwebtoken');
+const Task = require('./models/task');
+const User = require('./models/user');
 
-const myFunction = async () => {
-  const token = jwt.sign({ _id: 'abc123' }, 'thismynewcourse', { expiresIn: '7 days' });
-  console.log(token);
+const main = async () => {
+  // const task = await Task.findById('5de56c7385c0083ea88073e1');
+  // await task.populate('owner').execPopulate();
+  // console.log(task.owner);
 
-  const data = jwt.verify(token, 'thismynewcourse');
-  console.log(data);
+  const user = await User.findById('5ddee0bf1f76a31564b716bd');
+  await user.populate('tasks').execPopulate();
+  console.log(user.tasks);
 };
 
-myFunction();
+main();
