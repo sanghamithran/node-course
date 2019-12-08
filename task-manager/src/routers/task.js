@@ -23,6 +23,7 @@ router.post('/tasks', auth, async (req, res) => {
 });
 
 // GET /tasks?completed=true
+// GET /tasks?limit=10&skip=20
 router.get('/tasks', auth, async (req, res) => {
   try {
     const match = {};
@@ -34,6 +35,11 @@ router.get('/tasks', auth, async (req, res) => {
     await req.user.populate({
       path: 'tasks',
       match,
+      options: {
+        // https://eslint.org/docs/rules/radix -> second argument(10)
+        limit: parseInt(req.query.limit, 10),
+        skip: parseInt(req.query.skip, 10),
+      },
     }).execPopulate();
     res.send(req.user.tasks);
   } catch (e) {
