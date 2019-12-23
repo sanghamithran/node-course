@@ -12,6 +12,16 @@ const multer = require('multer');
 
 const upload = multer({
   dest: 'images',
+  limits: {
+    fileSize: 1000000,
+  },
+  // eslint-disable-next-line consistent-return
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(doc|docx)$/)) {
+      return cb(new Error('Please upload Word Document'));
+    }
+    cb(undefined, true);
+  },
 });
 
 app.post('/upload', upload.single('upload'), (req, res) => {
