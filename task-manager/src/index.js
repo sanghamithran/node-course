@@ -26,6 +26,9 @@ const upload = multer({
 
 app.post('/upload', upload.single('upload'), (req, res) => {
   res.send();
+// eslint-disable-next-line no-unused-vars
+}, (error, req, res, next) => {
+  res.status(400).send({ error: error.message });
 });
 
 app.use(express.json());
