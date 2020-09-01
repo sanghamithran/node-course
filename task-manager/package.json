@@ -16,6 +16,7 @@
     "validator": "^10.9.0"
   },
   "devDependencies": {
+    "env-cmd": "^8.0.2",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
@@ -23,7 +24,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "env-cmd ./config/dev.env nodemon src/index.js"
   },
   "author": "",
   "license": "ISC"
