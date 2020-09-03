@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 const express = require('express');
 const multer = require('multer');
-const sharp = require('sharp');
+const jimp = require('jimp');
 const User = require('../models/user');
 const auth = require('../middleware/auth');
 const { sendWelcomeEmail, sendCancellationEmail } = require('../emails/account');
@@ -100,8 +100,8 @@ const upload = multer({
 });
 
 router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
-  const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer();
-  req.user.avatar = buffer;
+  const readBuffer = await jimp.read(req.file.buffer);
+  req.user.avatar = await readBuffer.cover(250, 250).getBufferAsync(jimp.MIME_PNG);
   await req.user.save();
   res.send();
 // eslint-disable-next-line no-unused-vars
