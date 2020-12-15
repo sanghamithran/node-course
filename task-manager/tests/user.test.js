@@ -1,33 +1,19 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
 const request = require('supertest');
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
 const app = require('../src/app');
 const User = require('../src/models/user');
+const { userOneId, userOne, setupDatabase } = require('./fixtures/db');
 
-const userOneId = new mongoose.Types.ObjectId();
-const userOne = {
-  _id: userOneId,
-  name: 'Mike',
-  email: 'mike@example.com',
-  password: '56What!!',
-  tokens: [
-    { token: jwt.sign({ _id: userOneId }, process.env.JWT_SECRET) },
-  ],
-};
-
-beforeEach(async () => {
-  await User.deleteMany();
-  await new User(userOne).save();
-});
+beforeEach(setupDatabase);
 
 test('Should sign up a new user', async () => {
-  const response = await request(app).post('/users').send({
-    name: 'Andrew',
-    email: 'andrew@example.com',
-    password: 'MyPass777!',
-  }).expect(201);
+  const response = await request(app)
+    .post('/users').send({
+      name: 'Andrew',
+      email: 'andrew@example.com',
+      password: 'MyPass777!',
+    }).expect(201);
 
   // Assert that database is changed correctly
   const user = await User.findById(response.body.user._id);
